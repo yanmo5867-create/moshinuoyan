@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <style name="Theme.Moyan" parent="Theme.MaterialComponents.NoActionBar">
+        <item name="colorPrimary">#1B5E20</item>
+        <item name="colorPrimaryDark">#0D3B10</item>
+        <item name="colorAccent">#FFD700</item>
+        <item name="android:statusBarColor">#0D3B10</item>
+        <item name="android:navigationBarColor">#0D3B10</item>
+        <item name="android:windowBackground">#1a5c3a</item>
+    </style>
+</resources>

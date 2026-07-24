@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="108dp"
+    android:height="108dp"
+    android:viewportWidth="108"
+    android:viewportHeight="108">
+    <!-- 金色M -->
+    <path
+        android:fillColor="#FFD700"
+        android:pathData="M24,80 L24,28 L36,28 L44,56 L52,28 L60,28 L60,80 L52,80 L52,48 L44,76 L36,48 L36,80 Z M68,80 L68,28 L76,28 L76,72 L92,72 L92,28 L100,28 L100,80 Z" />
+</vector>

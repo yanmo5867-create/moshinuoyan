@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="green_felt">#1a5c3a</color>
+    <color name="green_dark">#0d3b24</color>
+    <color name="gold">#FFD700</color>
+    <color name="gold_dark">#B8860B</color>
+    <color name="card_bg">#F5F5F5</color>
+    <color name="card_red">#D32F2F</color>
+    <color name="card_black">#212121</color>
+    <color name="card_joker_big">#FFD700</color>
+    <color name="card_joker_small">#9E9E9E</color>
+    <color name="overlay_dark">#CC000000</color>
+    <color name="overlay_light">#33FFFFFF</color>
+    <color name="btn_green">#2E7D32</color>
+    <color name="btn_blue">#1565C0</color>
+    <color name="btn_gray">#455A64</color>
+    <color name="btn_red">#D32F2F</color>
+    <color name="btn_purple">#6A1B9A</color>
+    <color name="text_white">#FFFFFF</color>
+    <color name="text_gold">#FFD700</color>
+    <color name="text_dim">#B0BEC5</color>
+</resources>

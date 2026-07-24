@@ -1,0 +1,159 @@
+=====================================================
+  漠视诺言 上传到 GitHub 教程（纯命令行版）
+=====================================================
+
+本教程假设你已经在 GitHub 上**新建了一个空仓库**（不要勾选 README）。
+
+=====================================================
+第1步：安装必要工具（只需一次）
+=====================================================
+打开 Termux，依次执行：
+
+  pkg update -y
+  pkg install -y git openssh
+
+如果 pkg 源连不上，先换源：
+  termux-change-repo   （选一个延迟最低的源，比如 Japan 或 Singapore）
+
+=====================================================
+第2步：配置 Git 身份（只需一次）
+=====================================================
+
+  git config --global user.name "yanmo5867-create"
+  git config --global user.email "yanmo5867@gmail.com"
+
+=====================================================
+第3步：配置 SSH 密钥（只需一次）
+=====================================================
+
+  ssh-keygen -t ed25519 -C "yanmo5867@gmail.com"
+  （一路回车，不设置密码）
+
+  cat ~/.ssh/id_ed25519.pub
+  （复制输出的整行内容）
+
+  打开浏览器 → GitHub → 右上角头像 → Settings
+  → SSH and GPG keys → New SSH key
+  → 粘贴刚才复制的内容 → 保存
+
+  验证：
+  ssh -T git@github.com
+  （看到 "Hi yanmo5867-create!" 就成功了）
+
+=====================================================
+第4步：推送代码到 GitHub
+=====================================================
+注意：把下面 URL 中的仓库名改成你自己建的仓库名！
+
+  cd ~/moyan_v3
+  git init
+  git add -f .
+  git commit -m "漠视诺言 v3.0 完整版"
+  git remote add origin git@github.com:yanmo5867-create/你的仓库名.git
+  git push -u origin master:main -f
+
+=====================================================
+第5步：触发自动构建
+=====================================================
+
+  打开浏览器 → 进入你的仓库 → 点击 Actions 标签
+  → 左侧点击 "Build Android APK"
+  → 右上角点击 "Run workflow" → 再点绿色 "Run workflow"
+
+  等待 5-10 分钟，黄色圆圈变绿色 ✅
+  → 点进去 → 拉到最底部 Artifacts
+  → 下载 moyan-APK.zip → 解压得到 app-debug.apk
+
+=====================================================
+常见问题
+=====================================================
+
+Q: ssh -T 提示 Permission denied (publickey)
+A: 说明公钥没正确添加到 GitHub，重新检查第3步。
+
+Q: git push 提示 Could not resolve hostname
+A: 网络问题，等几秒重试，或切换 WiFi/流量。
+
+Q: Actions 页面是空的
+A: 确保 .github/workflows/build.yml 文件存在并已推送。
+   在仓库 Settings → Actions → 选择 "Allow all actions"。
+
+Q: 构建失败提示 gradle 版本不对
+A: 工作流文件已锁定 Gradle 8.0 + JDK 17，如果还报错，
+   检查 build.gradle 中 classpath 版本是否为 8.1.4。
+
+=====================================================
+项目结构
+=====================================================
+
+moyan_v3/
+├── .github/workflows/build.yml   ← GitHub 自动构建脚本
+├── app/
+│   ├── build.gradle            ← 模块构建配置
+│   ├── proguard-rules.pro
+│   └── src/main/
+│       ├── AndroidManifest.xml
+│       ├── java/com/moyan/landlord/
+│       │   ├── MoyanApp.java          ← Application 入口
+│       │   ├── audio/
+│       │   │   ├── AudioManager.java  ← 音效 + TTS
+│       │   │   └── VibrationManager.java ← 振动
+│       │   ├── effect/
+│       │   │   └── EffectManager.java ← 特效
+│       │   ├── engine/
+│       │   │   ├── AIEngine.java     ← AI 出牌
+│       │   │   ├── CardCounter.java  ← 记牌器
+│       │   │   ├── CardEngine.java   ← 牌型引擎
+│       │   │   ├── CoinRankManager.java ← 斗币/段位
+│       │   │   ├── FiftyKEngine.java ← 五十K
+│       │   │   ├── GameEngine.java   ← 游戏主流程
+│       │   │   ├── RefreshRateManager.java ← 帧率
+│       │   │   └── SettingsManager.java ← 设置
+│       │   ├── model/
+│       │   │   ├── Card.java         ← 卡牌数据
+│       │   │   └── CardType.java    ← 牌型枚举
+│       │   └── ui/
+│       │       ├── CardView.java     ← 卡牌视图
+│       │       ├── CardTouchHandler.java ← 滑动选牌
+│       │       ├── GameActivity.java  ← 对局界面
+│       │       ├── MainActivity.java  ← 首页
+│       │       └── SettingsActivity.java ← 设置页
+│       └── res/
+│           ├── drawable/  ← 背景/图标
+│           ├── layout/   ← 界面布局
+│           └── values/    ← 颜色/字符串/样式
+├── gradle/wrapper/        ← Gradle Wrapper
+├── build.gradle            ← 项目级构建配置
+├── settings.gradle         ← 项目设置
+└── README.md
+
+=====================================================
+技术栈
+=====================================================
+- 语言：Java 17
+- 构建：Gradle 8.0 + Android Gradle Plugin 8.1.4
+- 最低支持：Android 6.0 (API 23)
+- 目标版本：Android 14 (API 34)
+- 构建工具：GitHub Actions (Ubuntu + JDK 17)
+
+=====================================================
+功能清单
+=====================================================
+✅ 完整斗地主规则（13种牌型 + 王炸）
+✅ 10档AI难度（菜鸟 → 至尊斗帝）
+✅ 记牌器（实时统计已出牌）
+✅ 斗币系统 + 13级段位
+✅ 7种游戏模式入口
+✅ 叫分/抢地主/加倍/春天判定
+✅ 滑动选牌 + 单击切换
+✅ TTS语音播报出牌
+✅ 4级振动反馈
+✅ 7档画质特效
+✅ 30/60/90/120Hz 帧率调节
+✅ 开发者运气值调节
+✅ 竖屏首页 → 横屏对局自动切换
+✅ 后台暂停 / 切回续玩
+
+=====================================================
+end of file
+=====================================================

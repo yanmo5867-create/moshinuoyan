@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="fps_options">
+        <item>30fps（省电）</item>
+        <item>60fps（标准）</item>
+        <item>90fps（流畅）</item>
+        <item>120fps（极致）</item>
+    </string-array>
+    <string-array name="quality_options">
+        <item>省电</item>
+        <item>低</item>
+        <item>中低</item>
+        <item>中</item>
+        <item>中高</item>
+        <item>高</item>
+        <item>极致</item>
+    </string-array>
+    <string-array name="mode_options">
+        <item>经典场</item>
+        <item>不洗牌场</item>
+        <item>癞子场</item>
+        <item>明牌场</item>
+        <item>快速场</item>
+        <item>五十K场</item>
+        <item>双副牌场</item>
+    </string-array>
+</resources>
